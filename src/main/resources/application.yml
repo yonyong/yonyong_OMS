@@ -1,0 +1,57 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    druid:
+      url: jdbc:mysql://马赛克:3306/yonyong?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: 马赛克
+      password: 马赛克
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false # ����ʱ�رջ���,��Ȼû������ʵʱҳ��
+    mode: LEGACYHTML5 # �÷��ϸ�� HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  aop:
+    proxy-target-class: true
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    sentinel:
+      master: mymaster
+      nodes: 马赛克:26379, 马赛克:26380, 马赛克:26381
+  rabbitmq:
+    host: 马赛克
+    port: 5672
+    username: 马赛克
+    password: 马赛克
+
+server:
+  port: 8502
+
+# MyBatis Config properties
+mybatis:
+  type-aliases-package: cn.com.connext.oms.entity
+  mapper-locations: classpath:mapper/*.xml
+  # �շ�
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+logging:
+  level:
+    org.caps.website: trace
+  file: log/springboot.log
+  pattern:
+    file: .%d{yyyy-MM-dd} [%thread]  %-5level  %logger{50}  %msg%n
+    console: .%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n
+
