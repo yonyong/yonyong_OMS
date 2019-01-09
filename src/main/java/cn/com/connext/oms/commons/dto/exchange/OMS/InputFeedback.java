@@ -8,16 +8,26 @@ package cn.com.connext.oms.commons.dto.exchange.OMS;
  * @time: 21:31
  **/
 public class InputFeedback {
+    private String tokens;
     private int orderId;
     private String inputState;
     private String remark;
     private String modifiedUser;
 
-    public InputFeedback(int orderId, String inputState, String remark, String modifiedUser) {
+    public InputFeedback(String tokens, int orderId, String inputState, String remark, String modifiedUser) {
+        this.tokens = tokens;
         this.orderId = orderId;
         this.inputState = inputState;
         this.remark = remark;
         this.modifiedUser = modifiedUser;
+    }
+
+    public String getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(String tokens) {
+        this.tokens = tokens;
     }
 
     public int getOrderId() {

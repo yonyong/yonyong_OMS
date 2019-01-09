@@ -11,4 +11,15 @@
     <result column="total_stock" jdbcType="INTEGER" property="totalStock" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
   </resultMap>
+
+
+  <!--根据商品编号修改商品总库存-->
+  <update id="updateStock" parameterType="cn.com.connext.oms.entity.TbStock">
+    update tb_stock set total_stock=#{totalStock} where goods_id=#{goodsId}
+  </update>
+
+  <!--根据商品编码修改商品的锁定库存，可用库存-->
+  <update id="updateLockdAndAvailable" parameterType="cn.com.connext.oms.entity.TbStock">
+    update tb_stock set available_stock=available_stock+#{num},locked_stock=locked_stock+#{num2}    where goods_id=#{goodsId}
+  </update>
 </mapper>

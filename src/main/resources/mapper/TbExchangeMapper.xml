@@ -16,9 +16,9 @@
         <result column="return_state" jdbcType="VARCHAR" property="returnState" />
         <result column="order_id" jdbcType="INTEGER" property="orderId" />
         <result column="return_price" jdbcType="DOUBLE" property="returnPrice" />
-        <result column="created" jdbcType="DATETIME" property="created" />
+        <result column="created" jdbcType="TIMESTAMP" property="created" />
         <result column="modified_user" jdbcType="VARCHAR" property="modifiedUser" />
-        <result column="updated" jdbcType="DATETIME" property="updated" />
+        <result column="updated" jdbcType="TIMESTAMP" property="updated" />
         <result column="return_type" jdbcType="VARCHAR" property="returnType" />
     </resultMap>
 

@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class InRepertoryDTO extends ToMap {
+    private String token;
     private String inRepoId;
     private String orderId;
     private String channelId;
@@ -18,13 +19,22 @@ public class InRepertoryDTO extends ToMap {
     private String expressId;
     private List<InRepertoryDetailDTO> detailDTOS;
 
-    public InRepertoryDTO(String inRepoId, String orderId, String channelId, String expressCompany, String expressId, List<InRepertoryDetailDTO> detailDTOS) {
+    public InRepertoryDTO(String token, String inRepoId, String orderId, String channelId, String expressCompany, String expressId, List<InRepertoryDetailDTO> detailDTOS) {
+        this.token = token;
         this.inRepoId = inRepoId;
         this.orderId = orderId;
         this.channelId = channelId;
         this.expressCompany = expressCompany;
         this.expressId = expressId;
         this.detailDTOS = detailDTOS;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getInRepoId() {

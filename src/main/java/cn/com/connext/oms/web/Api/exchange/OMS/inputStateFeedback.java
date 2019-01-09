@@ -2,11 +2,17 @@ package cn.com.connext.oms.web.Api.exchange.OMS;
 
 import cn.com.connext.oms.commons.dto.BaseResult;
 import cn.com.connext.oms.commons.dto.exchange.OMS.InputFeedback;
+import cn.com.connext.oms.entity.TbOrder;
 import cn.com.connext.oms.service.TbExchangeService;
+import cn.com.connext.oms.service.TbOrderService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @created with IDEA
@@ -16,10 +22,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @time: 21:24
  **/
 
-@RestController("/Api")
+@RestController
+@RequestMapping("/Api")
 public class inputStateFeedback {
     @Autowired
     private TbExchangeService tbExchangeService;
+
+    @Autowired
+    private TbOrderService tbOrderService;
+
+    /**
+     * @Author: caps
+     * @Description: 获取所有订单信息
+     * @Param: []
+     * @Return: cn.com.connext.oms.commons.dto.BaseResult
+     * @Create: 2019/1/6 10:24
+     */
+
+    @GetMapping("/getAllOrder")
+    @ApiOperation(value = "订单数据接口")
+    public BaseResult getAllOrder(String orderState){
+        try {
+            List<TbOrder> allOrder = tbOrderService.getAllOrder(orderState);
+            return BaseResult.success("成功",allOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return BaseResult.fail("服务器内部错误");
+        }
+    }
 
     /**
      * create by: yonyong

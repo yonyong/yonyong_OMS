@@ -88,7 +88,7 @@ public class TbExchangeController {
      * @return cn.com.connext.oms.commons.dto.BaseResult
      */
     @RequestMapping("/toGenerateExchangeOrder")
-    public BaseResult toGenerateExchangeOrder(@RequestParam("orderId")int[] orderId,
+    public BaseResult toGenerateExchangeOrder(@RequestParam("orderId")int orderId,
                                               @RequestParam("goodId")int[] goodId,
                                               @RequestParam("num")int[] num){
         TbGoods tbGoods=new TbGoods();
@@ -152,64 +152,15 @@ public class TbExchangeController {
      * @return cn.com.connext.oms.commons.dto.BaseResult
      */
      @RequestMapping("/toAudit ")
-    public BaseResult toAudit(@RequestParam("ids")int [] ids,
-                              @RequestParam("orderId")int orderId){
+    public BaseResult toAudit(@RequestParam("ids")int [] ids){
          Date date=new Date();
          int rs=tbExchangeService.AuditTbReturn(ids,"yonyong",date);
          if (rs!=1){
              return BaseResult.fail("操作失败！");
          }
-
-         //审核成功！生成入库单，并发送至WMS
-         int rsGenerateInput=tbExchangeService.generateInput(orderId);
-         if (-1 == rsGenerateInput){
-             return BaseResult.fail("生成入库单失败！");
-         }
-         else if (1 == rsGenerateInput){
-             return BaseResult.success("已经成功生成入库单！");
-         }else {
-             return BaseResult.fail("无法成功推送订单到WMS！");
-         }
+         int rt=tbExchangeService.generateInput(ids);
+         return BaseResult.success("完成");
 
     }
 
-//    /**
-//     * create by: yonyong
-//     * description: 生成入库单
-//     * create time: 2019/1/7 14:41
-//     *
-//     *  * @Param: order_id
-//     * @return cn.com.connext.oms.commons.dto.BaseResult
-//     */
-//    @RequestMapping("/toInput")
-//    public BaseResult toInput(@RequestParam("orderId")int orderId ){
-//        int rs=tbExchangeService.generateInput(orderId);
-//        if (-1 == rs){
-//            return BaseResult.fail("生成入库单失败！");
-//        }
-//        else {
-//            return BaseResult.success("已经成功生成入库单！");
-//        }
-//    }
-//
-//    /**
-//     * create by: yonyong
-//     * description: 生成出库单
-//     * create time: 2019/1/7 15:01
-//     *
-//     *  * @Param: order_id
-//     * @Param: good_code
-//     * @Param: num
-//     * @return cn.com.connext.oms.commons.dto.BaseResult
-//     */
-//    @RequestMapping("/toOutput")
-//    public BaseResult toOutput(@RequestParam("orderId")int orderId){
-//        int rs=tbExchangeService.generateOutput(orderId,"yonyong");
-//        if (-1==rs){
-//            return BaseResult.fail("生成出库单失败！");
-//        }
-//        else {
-//            return BaseResult.success("已经成功生成出库单！");
-//        }
-//    }
 }

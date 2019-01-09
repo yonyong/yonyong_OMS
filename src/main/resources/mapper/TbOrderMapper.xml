@@ -115,7 +115,7 @@
   </select>
 
     <!-- yonyong-->
-    <select id="getOrderByOrderId" resultMap="BaseResultMap" parameterType="int">
+    <select id="getOrderDetailsByOrderId" resultMap="BaseResultMap" parameterType="int">
            SELECT
       a.order_id,
       a.order_code,
@@ -169,5 +169,53 @@
   AND d.goods_id = c.goods_id
   AND a.order_id = b.order_id
   and a.order_id=#{id}
+    </select>
+
+    <!--根据订单ID查询订单所有信息 -->
+    <select id="getOrderById" parameterType="Integer" resultMap="BaseResultMap">
+        SELECT * FROM tb_order WHERE order_id=#{orderId}
+    </select>
+    <!--根据订单ID查询订单和快递信息-->
+    <select id="getAllById" parameterType="Integer" resultType="cn.com.connext.oms.commons.dto.OrderGoodsReceiverDto">
+        select * from tb_order o
+       /* inner join tb_goods_order go on go.order_id=o.order_id
+        inner join tb_goods g on g.goods_id=go.goods_id*/
+        INNER JOIN tb_receiver r on r.receiver_id=o.receiver_id
+        WHERE o.order_id=#{orderId}
+    </select>
+
+    <!--根据订单id查询订单-->
+    <select id="getOrderByOrderId" resultMap="BaseResultMap">
+        SELECT
+         a.order_id,
+      a.order_code,
+      a.channel_code,
+      a.order_state,
+      a.order_source,
+      a.purchase_time,
+      a.basic_state,
+      a.modified_user,
+      a.customer_id,
+      a.updated,
+      a.payment_state,
+      a.payment_way,
+      a.payment_time,
+      a.delivery_warehouse,
+      a.delivery_company,
+      a.delivery_code,
+      a.delivery_time,
+      a.sum_price,
+      a.receiver_id,
+      a.remark
+      FROM tb_order as a
+      WHERE a.order_id = #{orderId}
+
+    </select>
+
+    <!--根据订单id查询订单生成时间-->
+    <select id="selectCreatedById" resultType="Date">
+        SELECT purchase_time
+        FROM tb_order
+        WHERE order_id = #{orderId}
     </select>
 </mapper>

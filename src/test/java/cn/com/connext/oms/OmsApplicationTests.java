@@ -20,9 +20,9 @@ public class OmsApplicationTests {
 
     @Test
     public void contextLoads() {
-        int a[]={1,2,3};
-        int b[]={16010954,16010510,16012015};
-        int c[]={1,2,3};
+        int a=1901060001;
+        int b[]={16011353,16011522};
+        int c[]={1,2};
         tbExchangeService.toGenerateExchangeOrderGoods(a,b,c);
     }
 

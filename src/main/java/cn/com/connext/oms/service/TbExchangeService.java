@@ -51,7 +51,7 @@ public interface TbExchangeService {
      * @Param: num
      * @return
      */
-    public void toGenerateExchangeOrderGoods(int[] orderId,
+    public void toGenerateExchangeOrderGoods(int orderId,
                                              int[] goodsId,
                                              int[] number);
 
@@ -86,7 +86,7 @@ public interface TbExchangeService {
       * @Param: tbGoods
      * @return cn.com.connext.oms.entity.TbReturn
      */
-    public TbReturn setTbReturn(int[] orderId, int[] goodId, int[] num);
+    public TbReturn setTbReturn(int orderId, int[] goodId, int[] num);
 
 
     /**
@@ -123,7 +123,7 @@ public interface TbExchangeService {
      *  * @Param: orderId
      * @return int
      */
-    public int generateInput(int orderId);
+    public int generateInput(int[] ids);
 
     /**
      * create by: yonyong
@@ -137,4 +137,13 @@ public interface TbExchangeService {
      */
     public int generateOutput(InputFeedback inputFeedback);
 
+    /**
+     * create by: yonyong
+     * description: 根据Tbreturn_id查询对应的信息
+     * create time: 2019/1/9 11:34
+     *
+     *  * @Param: returnId
+     * @return cn.com.connext.oms.entity.TbReturn
+     */
+    public TbReturn selectTbReturnByReturnId(int returnId);
 }
